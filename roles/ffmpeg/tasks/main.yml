@@ -4,10 +4,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - software-properties-common
-    - apt-transport-https
-    - ca-certificates
-    - gnupg
+    - curl
+    - net-tools
+    - plocate
+    - git
 
 - name: Add ffmpeg repository
   apt_repository:
