@@ -3,17 +3,15 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - curl
     - net-tools
     - plocate
     - git
 
-- name: Add ffmpeg repository
-  apt_repository:
-    repo: ppa:jonathonf/ffmpeg-4
-    state: present
-  when: ansible_distribution == 'Ubuntu'
+- name: Update apt cache
+  apt:
+    update_cache: yes
 
 - name: Installation of ffmpeg
   package:
@@ -25,9 +23,9 @@
   command: ffmpeg -version
   register: ffmpeg_version
   changed_when: false
-  when: ffmpeg_install is success
+  failed_when: ffmpeg_install is failed
 
 - name: Display ffmpeg version
   debug:
     msg: "{{ ffmpeg_version.stdout_lines[0] }}"
-  when: ffmpeg_version is defined 
+  when: ffmpeg_version is defined
