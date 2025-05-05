@@ -1,0 +1,11 @@
+# This is the main playbook for deploying Mediahub and its dependencies.
+# It includes the roles for ffmpeg, mariadb, mediahub, shaka-packager, and tsduck.
+---
+- name: Deploy Mediahub
+  hosts: all
+  roles:
+    - ffmpeg
+    - mariadb
+    - mediahub
+    - shaka-packager
+    - tsduck
