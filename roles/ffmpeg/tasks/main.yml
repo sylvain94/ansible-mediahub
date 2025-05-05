@@ -1,0 +1,33 @@
+---
+- name: Installation of system dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - software-properties-common
+    - apt-transport-https
+    - ca-certificates
+    - gnupg
+
+- name: Add ffmpeg repository
+  apt_repository:
+    repo: ppa:jonathonf/ffmpeg-4
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Installation of ffmpeg
+  package:
+    name: ffmpeg
+    state: present
+  register: ffmpeg_install
+
+- name: Check ffmpeg version
+  command: ffmpeg -version
+  register: ffmpeg_version
+  changed_when: false
+  when: ffmpeg_install is success
+
+- name: Display ffmpeg version
+  debug:
+    msg: "{{ ffmpeg_version.stdout_lines[0] }}"
+  when: ffmpeg_version is defined 
