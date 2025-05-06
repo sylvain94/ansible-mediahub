@@ -14,7 +14,7 @@
     msg: "{{ lookup('env', 'PATH') }}"
 
 - name: Install python3-apt
-  raw: /usr/bin/apt-get update && /usr/bin/apt-get install -y python3-apt
+  shell: /usr/bin/apt-get update && /usr/bin/apt-get install -y python3-apt
   become: yes
   args:
     executable: /bin/bash
