@@ -9,9 +9,15 @@
   debug:
     msg: "OS Family: {{ ansible_os_family }}, Distribution: {{ ansible_distribution }}, Version: {{ ansible_distribution_version }}"
 
+- name: Debug PATH
+  debug:
+    msg: "{{ lookup('env', 'PATH') }}"
+
 - name: Install python3-apt
-  raw: apt-get update && apt-get install -y python3-apt
+  raw: /usr/bin/apt-get update && /usr/bin/apt-get install -y python3-apt
   become: yes
+  args:
+    executable: /bin/bash
 
 - name: Update apt cache
   apt:
