@@ -16,13 +16,6 @@
     executable: /bin/bash
   when: ansible_os_family == "Debian"
 
-- name: Install python3-apt (RedHat)
-  dnf:
-    name: python3-apt
-    state: present
-  become: yes
-  when: ansible_os_family == "RedHat"
-
 - name: Update apt cache (Debian)
   apt:
     update_cache: yes
