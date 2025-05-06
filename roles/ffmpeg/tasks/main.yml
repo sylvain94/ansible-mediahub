@@ -3,11 +3,15 @@
   set_fact:
     ansible_os_family: "Debian"
     ansible_distribution: "Ubuntu"
-    ansible_distribution_version: "22.04"
+    ansible_distribution_version: "24.04"
 
 - name: Debug OS family
   debug:
     msg: "OS Family: {{ ansible_os_family }}, Distribution: {{ ansible_distribution }}, Version: {{ ansible_distribution_version }}"
+
+- name: Install python3-apt
+  raw: apt-get update && apt-get install -y python3-apt
+  become: yes
 
 - name: Update apt cache
   apt:
