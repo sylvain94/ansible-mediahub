@@ -1,49 +1,36 @@
 ---
-- name: Set OS family fact
-  set_fact:
-    ansible_os_family: "{{ ansible_facts.os_family }}"
-    ansible_distribution: "{{ ansible_facts.distribution }}"
-    ansible_distribution_version: "{{ ansible_facts.distribution_version }}"
+- name: Check OS type
+  shell: cat /etc/os-release | grep ID= | cut -d= -f2 | tr -d '"'
+  register: os_type
+  changed_when: false
 
-- name: Debug OS family
+- name: Debug OS type
   debug:
-    msg: "OS Family: {{ ansible_os_family }}, Distribution: {{ ansible_distribution }}, Version: {{ ansible_distribution_version }}"
-
-- name: Update apt cache (Debian)
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == "Debian"
-
-- name: Update dnf cache (RedHat)
-  dnf:
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == "RedHat"
+    msg: "OS Type: {{ os_type.stdout }}"
 
 - name: Installation of system dependencies (Debian)
   apt:
     name: "{{ item }}"
     state: present
-    update_cache: no
+    update_cache: yes
   loop:
     - curl
     - net-tools
     - plocate
     - git
-  when: ansible_os_family == "Debian"
+  when: "'debian' in os_type.stdout or 'ubuntu' in os_type.stdout"
 
 - name: Installation of system dependencies (RedHat)
   dnf:
     name: "{{ item }}"
     state: present
-    update_cache: no
+    update_cache: yes
   loop:
     - curl
     - net-tools
     - mlocate
     - git
-  when: ansible_os_family == "RedHat"
+  when: "'centos' in os_type.stdout or 'rhel' in os_type.stdout"
 
 - name: Installation of ffmpeg (Debian)
   apt:
@@ -51,7 +38,7 @@
     state: present
     update_cache: no
   register: ffmpeg_install
-  when: ansible_os_family == "Debian"
+  when: "'debian' in os_type.stdout or 'ubuntu' in os_type.stdout"
 
 - name: Installation of ffmpeg (RedHat)
   dnf:
@@ -59,7 +46,7 @@
     state: present
     update_cache: no
   register: ffmpeg_install
-  when: ansible_os_family == "RedHat"
+  when: "'centos' in os_type.stdout or 'rhel' in os_type.stdout"
 
 - name: Check ffmpeg version
   command: ffmpeg -version
