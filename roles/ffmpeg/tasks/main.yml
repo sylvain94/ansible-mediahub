@@ -1,6 +1,6 @@
 ---
 - name: Installation of system dependencies
-  package:
+  apt:
     name: unzip
-    state: lastest
-    become: true
+    state: latest
+  become: true
