@@ -3,6 +3,7 @@
 ---
 - name: Deploy Mediahub
   hosts: all
+  gather_facts: false
   roles:
     - ffmpeg
     - mariadb
