@@ -1,7 +1,8 @@
 ---
-- name: Installation of ffmpeg (Debian)
-  apt:
-    name: ffmpeg
-    state: present
-    update_cache: no
-  register: ffmpeg_install
+name: I am going to install package
+hosts: all
+tasks: 
+  - name: Install package
+    yum:
+      name: unzip
+      state: latest
