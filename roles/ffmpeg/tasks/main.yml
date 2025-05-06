@@ -1,4 +1,10 @@
 ---
+- name: Set OS family fact
+  set_fact:
+    ansible_os_family: "Debian"
+    ansible_distribution: "Ubuntu"
+    ansible_distribution_version: "22.04"
+
 - name: Debug OS family
   debug:
     msg: "OS Family: {{ ansible_os_family }}, Distribution: {{ ansible_distribution }}, Version: {{ ansible_distribution_version }}"
@@ -34,4 +40,4 @@
 - name: Display ffmpeg version
   debug:
     msg: "{{ ffmpeg_version.stdout_lines[0] }}"
-  when: ffmpeg_version is defined
+  when: ffmpeg_version is defined 
