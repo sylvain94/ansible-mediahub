@@ -1,6 +1,9 @@
 ---
 - name: Installation of system dependencies
+  hosts: all
   apt:
     name: ffmpeg
     state: latest
+    update_cache: yes
   become: true
+  when: ansible_os_family == "Debian"
