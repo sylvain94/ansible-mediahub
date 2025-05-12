@@ -1,7 +1,10 @@
 ---
-- name: Installation of system dependencies
-  apt:
-    name: ffmpeg
-    state: latest
-    update_cache: yes
-  become: true
+- hosts: mediahubs
+  become: yes
+  tasks:
+
+    - name: update
+      apt: update_cache=yes
+
+    - name: Install ffmpeg
+      apt: name=ffmpeg state=present
