@@ -1,7 +1,4 @@
 ---
 - name: Installation of system dependencies
-  apt:
-    name: ffmpeg
-    state: latest
-    update_cache: yes
+  apt: name=ffmpeg state=present
   become: true
