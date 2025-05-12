@@ -1,6 +1,5 @@
 ---
 - name: Installation of system dependencies
-  hosts: all
   apt:
     name: ffmpeg
     state: latest
