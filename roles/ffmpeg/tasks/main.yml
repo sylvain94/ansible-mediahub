@@ -1,4 +1,6 @@
 ---
 - name: Installation of system dependencies
-  apt: name=ffmpeg state=present
+  apt: 
+    name: ffmpeg
+    state: present
   become: true
