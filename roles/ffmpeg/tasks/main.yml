@@ -1,6 +1,6 @@
 ---
 - name: Installation of system dependencies
   apt:
-    name: unzip
+    name: ffmpeg
     state: latest
   become: true
