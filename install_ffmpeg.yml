@@ -1,15 +1,10 @@
-- name: Installer ffmpeg sur Ubuntu
+- name: Tester l'environnement distant
   hosts: all
   become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Update apt cache
-      shell: "/usr/bin/apt-get update"
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    - name: Afficher le PATH du shell root
+      shell: "echo $PATH"
+      register: result
 
-    - name: Install ffmpeg
-      shell: "/usr/bin/apt-get install -y ffmpeg"
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    - debug:
+        var: result.stdout
