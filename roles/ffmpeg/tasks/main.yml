@@ -1,6 +1,5 @@
 ---
 - name: Installation of ffmpeg
-  hosts: all
   apt: 
     name: ffmpeg
     state: present
