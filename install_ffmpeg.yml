@@ -4,11 +4,11 @@
   become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
-  environment:
-    PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   tasks:
     - name: Installer ffmpeg
       apt:
         name: ffmpeg
         state: present
         update_cache: true
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
