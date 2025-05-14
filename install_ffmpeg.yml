@@ -1,14 +1,15 @@
----
 - name: Installer ffmpeg sur Ubuntu
   hosts: all
   become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-    - name: Installer ffmpeg
-      apt:
-        name: ffmpeg
-        state: present
-        update_cache: true
+    - name: Update apt cache
+      shell: "/usr/bin/apt-get update"
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+    - name: Install ffmpeg
+      shell: "/usr/bin/apt-get install -y ffmpeg"
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
