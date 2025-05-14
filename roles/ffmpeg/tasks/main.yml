@@ -1,10 +1,8 @@
 ---
-- name: Install ffmpeg
-  hosts: mediahub-05
-  become: yes
-  tasks:
-    - name: Install ffmpeg
-      apt:
-        name: ffmpeg
-        state: present
-        update_cache: yes
+- name: Installation of ffmpeg
+  hosts: all
+  apt: 
+    name: ffmpeg
+    state: present
+    update_cache: yes
+  become: true
