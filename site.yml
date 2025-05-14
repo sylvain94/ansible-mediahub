@@ -6,7 +6,7 @@
   gather_facts: false
   roles:
     - ffmpeg
-    - mariadb
-    - mediahub
-    - shaka-packager
-    - tsduck
+#    - mariadb
+#    - mediahub
+#    - shaka-packager
+#    - tsduck
