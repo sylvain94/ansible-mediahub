@@ -4,7 +4,7 @@
   hosts: mediahub
   become: true
   tasks:
-    - name: Install ffmpeg
+    - name: Install package ffmpeg
       apt:
         name: ffmpeg
         state: present
