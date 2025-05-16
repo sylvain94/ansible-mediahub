@@ -2,6 +2,8 @@
 # This playbook installs ffmpeg on the mediahub server.
 - hosts: mediahub
   become: true
+  become_user: root
+  become_method: sudo
   tasks:
     - name: Install package ffmpeg
       apt:
