@@ -4,8 +4,7 @@
   become_user: root
   become_method: sudo
   tasks:
-    - name: Install package ffmpeg
-      apt:
-        name: ffmpeg
-        state: present
-        update_cache: yes 
+   - name: Update Ubuntu packages
+     apt: update_cache=yes force_apt_get=yes cache_valid_time= 3600
+   - name: Install package ffmpeg
+     apt: name=ffmpeg state=present update_cache=yes
