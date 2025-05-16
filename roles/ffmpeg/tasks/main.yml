@@ -1,7 +1,11 @@
 ---
-- name: Installation of ffmpeg
-  apt: 
-    name: ffmpeg
-    state: present
-    update_cache: yes
+# This playbook installs ffmpeg on the mediahub server.
+- name: Install ffmpeg
+  hosts: mediahub
   become: true
+  tasks:
+    - name: Install ffmpeg
+      apt:
+        name: ffmpeg
+        state: present
+        update_cache: yes 
