@@ -1,7 +1,6 @@
 ---
 # This playbook installs ffmpeg on the mediahub server.
-- name: Install ffmpeg
-  hosts: mediahub
+- hosts: mediahub
   become: true
   tasks:
     - name: Install package ffmpeg
