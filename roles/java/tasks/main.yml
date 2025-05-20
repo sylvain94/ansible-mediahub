@@ -1,0 +1,7 @@
+---
+# This playbook installs java 21 on the mediahub server.
+- name: Install the java 21 package
+  apt:
+    name: openjdk-21-jdk
+    state: present
+    update_cache: yes 
