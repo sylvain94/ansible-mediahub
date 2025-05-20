@@ -1,12 +1,7 @@
 ---
 # This playbook installs ffmpeg on the mediahub server.
-- hosts: mediahub
-  become: true
-  become_user: root
-  become_method: sudo
-  tasks:
-    - name: Install package ffmpeg
-      apt:
-        name: ffmpeg
-        state: present
-        update_cache: yes 
+- name: Installer le paquet ffmpeg
+  apt:
+    name: ffmpeg
+    state: present
+    update_cache: yes 
