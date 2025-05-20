@@ -1,6 +1,6 @@
 ---
 # This playbook installs ffmpeg on the mediahub server.
-- name: Installer le paquet ffmpeg
+- name: Install the ffmpeg package
   apt:
     name: ffmpeg
     state: present
