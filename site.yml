@@ -8,6 +8,6 @@
     - ffmpeg
     - java
     - mariadb # install mariadb + create database + configure user
-#    - mediahub # install mediahub-ws+ mediahub-admin
+    - mediahub # install mediahub-ws+ mediahub-admin
 #    - shaka-packager
 #    - tsduck
