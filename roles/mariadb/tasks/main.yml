@@ -1,0 +1,48 @@
+---
+# This playbook installs and configures a mariadb server on the mediahub server.
+- name: Install the mariadb package
+  apt:
+    name: mariadb-server
+    state: present
+    update_cache: yes 
+
+- name: Start the mariadb service
+  service:
+    name: mariadb
+    state: started
+
+- name: Create the mediahub database
+  mysql_db:
+    name:  media_hub
+    state: present
+
+- name: Create the mediahub user
+  mysql_user:
+    name: media_hub_user
+    password: "{{ db_password }}"
+    state: present
+
+- name: Grant all privileges to the mediahub user
+  mysql_user:
+    name: media_hub_user
+    priv: '*.*:ALL'
+    state: present
+
+- name: Flush privileges
+  mysql_user:
+    name: media_hub_user
+    flush_privileges: true
+    state: present
+
+- name: Test the connection to the database with media_hub_user
+  community.mysql.mysql_query:
+    login_user: media_hub_user
+    login_password: "{{ db_password }}"
+    login_db: media_hub
+    query: "SELECT 1;"
+  register: db_test
+
+- name: Print the result of the database connection test
+  debug:
+    var: db_test
+

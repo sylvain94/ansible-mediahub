@@ -1,0 +1,46 @@
+# Deploy mediahub-ws
+- name: Create mediahub-ws directory
+  file:
+    path: /opt/mediahubws
+    state: directory
+
+- name: Create mediahub-ws/bin directory
+  file:
+    path: /opt/mediahubws/bin
+    state: directory
+
+- name: Create mediahub-ws/lib directory
+  file:
+    path: /opt/mediahubws/lib
+    state: directory
+
+- name: Create mediahub-ws/release directory
+  file:
+    path: /opt/mediahubws/release
+    state: directory
+
+- name: Copy the mediahubws-0.0.1-SNAPSHOT.jar file to the mediahub-ws/release directory
+  copy:
+    src: mediahubws-0.0.1-SNAPSHOT.jar
+    dest: /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
+    mode: 0644
+
+- name: Change the owner of the jar
+  file:
+    path: /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
+    owner: root
+    group: root
+
+- name: Start mediahub-ws
+  shell: sudo java -jar /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
+
+- name: Test the mediahub-ws API (health check)
+  uri:
+    url: "http://{{ ansible_host }}:8080/mediahub/api/v1/health"
+    method: GET
+    return_content: yes
+  register: health_check
+
+- name: Print the health check result
+  debug:
+    var: health_check
