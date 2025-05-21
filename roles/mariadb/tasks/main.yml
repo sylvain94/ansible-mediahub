@@ -42,7 +42,7 @@
     query: "SELECT 1;"
   register: db_test
 
-- name: Print the result of the database connection test
+- name: Print the result of the database connection tests
   debug:
     var: db_test
 
