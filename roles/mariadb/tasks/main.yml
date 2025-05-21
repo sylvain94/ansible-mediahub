@@ -12,30 +12,30 @@
     state: started
 
 - name: Create the mediahub database
-  community.mysql.mysql_db:
+  ansible.builtin.mysql_db:
     name:  media_hub
     state: present
 
 - name: Create the mediahub user
-  community.mysql.mysql_user:
+  ansible.builtin.mysql_user:
     name: media_hub_user
     password: "{{ db_password }}"
     state: present
 
 - name: Grant all privileges to the mediahub user
-  community.mysql.mysql_user:
+  ansible.builtin.mysql_user:
     name: media_hub_user
     priv: '*.*:ALL'
     state: present
 
 - name: Flush privileges
-  community.mysql.mysql_user:
+  ansible.builtin.mysql_user:
     name: media_hub_user
     flush_privileges: true
     state: present
 
 - name: Test the connection to the database with media_hub_user
-  community.mysql.mysql_query:
+  ansible.builtin.mysql_query:
     login_user: media_hub_user
     login_password: "{{ db_password }}"
     login_db: media_hub
