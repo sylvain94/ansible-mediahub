@@ -25,7 +25,6 @@
     login_user: root
     login_password: "{{ db_password }}"    
     state: present
-  when: mariadb_server
 
 - name: Create the mediahub user
   community.mysql.mysql_user:
@@ -53,7 +52,7 @@
     query: "SELECT 1;"
   register: db_test
 
-- name: Print the result of the database connection tests
+- name: Print the result of the database connection test
   debug:
     var: db_test
 
