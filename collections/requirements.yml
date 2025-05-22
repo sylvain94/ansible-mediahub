@@ -1,5 +1,6 @@
 collections:
   - name: community.mysql
+    source: https://github.com/ansible-collections/community.mysql"
 
 
 
