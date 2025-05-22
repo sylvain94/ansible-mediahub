@@ -50,7 +50,7 @@
     name: ''
     state: reload
     login_user: root
-    login_password: "{{ mariadb_root_password }}"
+    login_password: "{{ db_password }}"
 
 - name: Create the mediahub database
   community.mysql.mysql_db:
@@ -89,6 +89,7 @@
     login_password: "{{ db_password }}"
     login_db: media_hub
     query: "SELECT 1;"
+    column_case_sensitive: false
   register: db_test
 
 - name: Print the result of the database connection test
