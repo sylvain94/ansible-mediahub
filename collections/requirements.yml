@@ -1,0 +1,13 @@
+collections:
+  - name: community.general
+  - name: community.mysql
+  - name: community.network
+  - name: community.postgresql
+  - name: community.docker
+  - name: community.kubernetes
+  - name: ansible.builtin
+  - name: ansible.posix
+  - name: ansible.windows
+  - name: ansible.netcommon
+
+
