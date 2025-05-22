@@ -11,6 +11,7 @@ ansible-mediahub.code-workspace
 
 # Documentation files
 docs/*.md
+todo.md
 
 # Logs
 logs
