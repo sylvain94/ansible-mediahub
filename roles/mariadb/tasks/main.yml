@@ -19,6 +19,39 @@
     name: mariadb
     state: started
 
+- name: Define the root password and change the authentication plugin
+  community.mysql.mysql_user:
+    name: root
+    host: localhost
+    password: "{{ db_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    check_implicit_admin: yes
+    priv: '*.*:ALL,GRANT'
+    state: present
+    plugin: mysql_native_password
+
+- name: Remove anonymous users
+  community.mysql.mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_user: root
+    login_password: "{{ db_password }}"
+
+- name: Remove the test database
+  community.mysql.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ db_password }}"
+
+- name: Reload the privileges
+  community.mysql.mysql_db:
+    name: ''
+    state: reload
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
 - name: Create the mediahub database
   community.mysql.mysql_db:
     name:  media_hub
@@ -31,18 +64,24 @@
     name: media_hub_user
     password: "{{ db_password }}"
     state: present
+    login_user: root
+    login_password: "{{ db_password }}"
 
 - name: Grant all privileges to the mediahub user
   community.mysql.mysql_user:
     name: media_hub_user
     priv: '*.*:ALL'
     state: present
+    login_user: root
+    login_password: "{{ db_password }}"
 
 - name: Flush privileges
   community.mysql.mysql_user:
     name: media_hub_user
     flush_privileges: true
     state: present
+    login_user: root
+    login_password: "{{ db_password }}"
 
 - name: Test the connection to the database with media_hub_user
   community.mysql.mysql_query:
