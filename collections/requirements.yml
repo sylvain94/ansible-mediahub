@@ -5,7 +5,7 @@ collections:
   - name: community.postgresql
   - name: community.docker
   - name: community.kubernetes
-  - name: ansible.builtin
+  - name: ansible.builtin.ping
   - name: ansible.posix
   - name: ansible.windows
   - name: ansible.netcommon
