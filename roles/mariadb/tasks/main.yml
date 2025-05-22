@@ -1,6 +1,6 @@
 ---
 # This playbook installs and configures a mariadb server on the mediahub server.
-- name: Install the mariadb package
+- name: Install the mariadb packages
   apt:
     name: 
       - mariadb-server
