@@ -20,7 +20,9 @@
 - name: Create the mediahub database
   community.mysql.mysql_db:
     name:  media_hub
+    login_user: root
     state: present
+  when: mariadb_server
 
 - name: Create the mediahub user
   community.mysql.mysql_user:
