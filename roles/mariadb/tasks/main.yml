@@ -70,7 +70,7 @@
 - name: Grant all privileges to the mediahub user
   community.mysql.mysql_user:
     name: media_hub_user
-    priv: '*.*:ALL'
+    priv: 'media_hub.*:ALL'
     state: present
     login_user: root
     login_password: "{{ db_password }}"
