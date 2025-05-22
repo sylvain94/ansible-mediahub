@@ -21,6 +21,7 @@
   community.mysql.mysql_db:
     name:  media_hub
     login_user: root
+    login_password: "{{ db_password }}"    
     state: present
   when: mariadb_server
 
