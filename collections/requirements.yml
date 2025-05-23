@@ -1,5 +1,7 @@
 collections:
   - name: community.mysql
+  - name: IbrahimMohammad.mysql_secure_installation
+    source: ansible-galaxy role install IbrahimMohammad.mysql_secure_installation
 
 
 
