@@ -1,7 +1,5 @@
 collections:
   - name: community.mysql
-  - name: IbrahimMohammad.mysql_secure_installation
-    source: https://github.com/IbrahimMohammad/ansible-role-mysql_secure_installation
 
 
 
