@@ -19,80 +19,10 @@
     name: mariadb
     state: started
 
-- name: Define the root password and change the authentication plugin
-  community.mysql.mysql_user:
-    name: root
-    host: localhost
-    password: "{{ db_password }}"
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-    check_implicit_admin: yes
-    priv: '*.*:ALL,GRANT'
-    state: present
-    plugin: mysql_native_password
-
-- name: Remove anonymous users
-  community.mysql.mysql_user:
-    name: ''
-    host_all: yes
-    state: absent
-    login_user: root
-    login_password: "{{ db_password }}"
-
-- name: Remove the test database
-  community.mysql.mysql_db:
-    name: test
-    state: absent
-    login_user: root
-    login_password: "{{ db_password }}"
-
-- name: Reload the privileges
-  community.mysql.mysql_db:
-    name: ''
-    state: reload
-    login_user: root
-    login_password: "{{ db_password }}"
-
 - name: Create the mediahub database
   community.mysql.mysql_db:
-    name:  media_hub
-    login_user: root
-    login_password: "{{ db_password }}"    
+    name: media_hub
+    login_user: ansible_user
+    login_password: "{{ ansible_user_password }}"    
     state: present
-
-- name: Create the mediahub user
-  community.mysql.mysql_user:
-    name: media_hub_user
-    password: "{{ db_password }}"
-    state: present
-    login_user: root
-    login_password: "{{ db_password }}"
-
-- name: Grant all privileges to the mediahub user
-  community.mysql.mysql_user:
-    name: media_hub_user
-    priv: 'media_hub.*:ALL'
-    state: present
-    login_user: root
-    login_password: "{{ db_password }}"
-
-- name: Flush privileges
-  community.mysql.mysql_user:
-    name: media_hub_user
-    flush_privileges: true
-    state: present
-    login_user: root
-    login_password: "{{ db_password }}"
-
-- name: Test the connection to the database with media_hub_user
-  community.mysql.mysql_query:
-    login_user: media_hub_user
-    login_password: "{{ db_password }}"
-    login_db: media_hub
-    query: "SELECT 1;"
-    column_case_sensitive: false
-  register: db_test
-
-- name: Print the result of the database connection test
-  debug:
-    var: db_test
 
