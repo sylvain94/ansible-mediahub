@@ -52,11 +52,11 @@
   become_user: root
   become_method: sudo
 
-- name: Test the mediahub-ws API (health check)
+- name: Test the mediahub-ws API health check
   uri:
     url: "http://{{ ansible_host }}:8080/api/v1/isAlive"
     method: GET
-    return_content: true
+    return_content: 'true'
   register: health_check
 
 - name: Print the health check result
