@@ -29,22 +29,6 @@
     login_user: ansible_user
     login_password: "{{ ansible_user_password }}"
     login_host: localhost
-    state: present
-
-- name: Grant all privileges to the mediahub user
-  community.mysql.mysql_user:
-    name: media_hub_user
     priv: 'media_hub.*:ALL'
-    login_user: ansible_user
-    login_password: "{{ ansible_user_password }}"
-    state: present
-
-
-- name: Flush privileges
-  community.mysql.mysql_user:
-    name: media_hub_user
     flush_privileges: true
-    login_user: ansible_user
-    login_password: "{{ ansible_user_password }}"
     state: present
-
