@@ -23,21 +23,9 @@
   copy:
     src: mediahubws-0.0.1-SNAPSHOT.jar
     dest: /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
-    mode: 0644
-
-- name: Change the owner of the jar
-  file:
-    path: /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
     owner: root
     group: root
-
-- name: Copy the mediahubws service file to the /etc/init.d/ directory 
-  copy:
-    src: mediahubws
-    dest: /etc/init.d/mediahubws
-    owner: root
-    group: root
-    mode: 0775
+    mode: 0755
 
 - name: Create a symlink to the mediahubws jar file
   file:
@@ -47,15 +35,18 @@
     owner: root
     group: root
 
-- name: Enable the mediahubws service
-  systemd:
-    name: mediahubws
-    enabled: yes
-    state: started
+- name: Copy the mediahubws service file to the /etc/init.d/ directory 
+  copy:
+    src: mediahubws
+    dest: /etc/init.d/mediahubws
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Start mediahub-ws
   service:
     name: mediahubws
+    enabled: yes
     state: started
 
 - name: Test the mediahub-ws API (health check)
