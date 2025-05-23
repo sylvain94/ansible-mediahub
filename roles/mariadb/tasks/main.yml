@@ -30,5 +30,4 @@
     login_password: "{{ ansible_user_password }}"
     login_host: localhost
     priv: 'media_hub.*:ALL'
-    flush_privileges: true
     state: present
