@@ -15,32 +15,27 @@
       name: mariadb
       state: started
 
-- name: copy mysql_secure_installation.sh to /root
-  copy:
-    src: mysql_secure_installation.sh
-    dest: /home/ansible/mysql_secure_installation.sh
-    mode: '0755'
-
-- name: Launch mysql_secure_installation
-  shell: sudo ./mysql_secure_installation.sh
-
-- name: Create the ansible_user
+- name: Create the media_hub_user
   community.mysql.mysql_user:
-    name: ansible_user
-    password: "{{ ansible_user_password }}"
+    name: media_hub_user
+    password: "{{ db_password }}"
     state: present
 
 - name: Grant all privileges to the mediahub user
   community.mysql.mysql_user:
-    name: ansible_user
-    priv: '*.*:ALL'
+    name: media_hub_user
+    priv: 'media_hub.*:ALL'
+    login_user: ansible_user
+    login_password: "{{ ansible_user_password }}"
     state: present
 
 
 - name: Flush privileges
   community.mysql.mysql_user:
-    name: ansible_user
+    name: media_hub_user
     flush_privileges: true
+    login_user: ansible_user
+    login_password: "{{ ansible_user_password }}"
     state: present
 
  
