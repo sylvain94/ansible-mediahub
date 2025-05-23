@@ -37,7 +37,7 @@
     dest: /etc/init.d/mediahubws
     owner: root
     group: root
-    mode: 0644
+    mode: 0775
 
 - name: Create a symlink to the mediahubws jar file
   file:
