@@ -27,7 +27,8 @@
     name: media_hub_user
     password: "{{ db_password }}"
     login_user: ansible_user
-    login_password: "{{ ansible_user_password }}"    
+    login_password: "{{ ansible_user_password }}"
+    login_host: localhost
     state: present
 
 - name: Grant all privileges to the mediahub user
