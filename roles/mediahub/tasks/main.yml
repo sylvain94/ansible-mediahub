@@ -31,14 +31,38 @@
     owner: root
     group: root
 
+- name: Copy the mediahubws service file to the /etc/systemd/system directory
+  copy:
+    src: mediahubws.service
+    dest: /etc/init.d/mediahubws
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create a symlink to the mediahubws jar file
+  file:
+    src: /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
+    dest: /opt/mediahubws/bin/mediahubws
+    state: link
+    owner: root
+    group: root
+
+- name: Enable the mediahubws service
+  systemd:
+    name: mediahubws
+    enabled: yes
+    state: started
+
 - name: Start mediahub-ws
-  shell: sudo java -jar /opt/mediahubws/release/mediahubws-0.0.1-SNAPSHOT.jar
+  service:
+    name: mediahubws
+    state: started
 
 - name: Test the mediahub-ws API (health check)
   uri:
     url: "http://{{ ansible_host }}:8080/api/v1/isAlive"
     method: GET
-    return_content: yes
+    return_content: true
   register: health_check
 
 - name: Print the health check result
