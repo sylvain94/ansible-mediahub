@@ -14,11 +14,20 @@
   service:
       name: mariadb
       state: started
+
+- name: copy mysql_secure_installation.sh to /root
+  copy:
+    src: mysql_secure_installation.sh
+    dest: /home/ansible/mysql_secure_installation.sh
+    mode: '0755'
+
+- name: Launch mysql_secure_installation
+  shell: sudo ./mysql_secure_installation.sh
  
-- name: Create Mediahub DB
-  community.mysql.mysql_db:
-      name: media_hub
-      login_user: ansible_user
-      login_password: test
-      state: present
+#- name: Create Mediahub DB
+#  community.mysql.mysql_db:
+#      name: media_hub
+#      login_user: ansible_user
+#      login_password: test
+#      state: present
 
