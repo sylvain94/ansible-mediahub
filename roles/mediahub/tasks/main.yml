@@ -48,6 +48,9 @@
     name: mediahubws
     enabled: yes
     state: started
+  become: yes
+  become_user: root
+  become_method: sudo
 
 - name: Test the mediahub-ws API (health check)
   uri:
