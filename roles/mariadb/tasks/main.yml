@@ -23,11 +23,34 @@
 
 - name: Launch mysql_secure_installation
   shell: sudo ./mysql_secure_installation.sh
+
+- name: Create the ansible_user
+  community.mysql.mysql_user:
+    name: ansible_user
+    password: "{{ ansible_user_password }}"
+    login_user: root
+    state: present
+
+- name: Grant all privileges to the mediahub user
+  community.mysql.mysql_user:
+    name: ansible_user
+    priv: '*.*:ALL'
+    login_user: root
+    state: present
+
+
+- name: Flush privileges
+  community.mysql.mysql_user:
+    name: ansible_user
+    flush_privileges: true
+    login_user: root
+    state: present
+
  
-#- name: Create Mediahub DB
-#  community.mysql.mysql_db:
-#      name: media_hub
-#      login_user: ansible_user
-#      login_password: test
-#      state: present
+- name: Create Mediahub DB
+  community.mysql.mysql_db:
+      name: media_hub
+      login_user: ansible_user
+      login_password: "{{ ansible_user_password }}"
+      state: present
 
