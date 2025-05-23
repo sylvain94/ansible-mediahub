@@ -19,6 +19,13 @@
     name: mariadb
     state: started
 
+- name: Create the ansible_user
+  community.mysql.mysql_user:
+    name: ansible_user
+    password: "{{ ansible_user_password }}"
+    state: present
+    login_user: root  
+
 - name: Create the mediahub database
   community.mysql.mysql_db:
     name: media_hub
