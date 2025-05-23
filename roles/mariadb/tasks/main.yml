@@ -29,5 +29,5 @@
     login_user: ansible_user
     login_password: "{{ ansible_user_password }}"
     login_host: localhost
-    priv: 'media_hub.*:ALL'
+    priv: 'media_hub.*:ALL,GRANT'
     state: present
