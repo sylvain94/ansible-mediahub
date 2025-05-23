@@ -19,29 +19,11 @@
     name: mariadb
     state: started
 
-- name: test mysql_secure_installation
-  mysql_secure_installation:
-    login_password: ''
-    new_password: ''
-    user: root
-    login_host: localhost
-    hosts: ['localhost', '127.0.0.1', '::1']
-    change_root_password: false
-    remove_anonymous_user: true
-    disallow_root_login_remotely: true
-    remove_test_db: true
-  register: mysql_secure
-
-# To see detailed output
-- debug:
-    var: mysql_secure    
-
 - name: Create the ansible_user
   community.mysql.mysql_user:
     name: ansible_user
     password: "{{ ansible_user_password }}"
     state: present
-    login_user: root
    
 - name: Create the mediahub database
   community.mysql.mysql_db:
