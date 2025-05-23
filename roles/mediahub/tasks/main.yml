@@ -31,9 +31,9 @@
     owner: root
     group: root
 
-- name: Copy the mediahubws service file to the /etc/systemd/system directory
+- name: Copy the mediahubws service file to the /etc/init.d/ directory 
   copy:
-    src: mediahubws.service
+    src: mediahubws
     dest: /etc/init.d/mediahubws
     owner: root
     group: root
