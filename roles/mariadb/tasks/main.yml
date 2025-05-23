@@ -28,14 +28,12 @@
   community.mysql.mysql_user:
     name: ansible_user
     password: "{{ ansible_user_password }}"
-    login_user: root
     state: present
 
 - name: Grant all privileges to the mediahub user
   community.mysql.mysql_user:
     name: ansible_user
     priv: '*.*:ALL'
-    login_user: root
     state: present
 
 
@@ -43,7 +41,6 @@
   community.mysql.mysql_user:
     name: ansible_user
     flush_privileges: true
-    login_user: root
     state: present
 
  
