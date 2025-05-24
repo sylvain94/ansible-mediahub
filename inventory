@@ -4,6 +4,9 @@ ansible_become=yes
 ansible_become_method=sudo
 ansible_python_interpreter= '/usr/bin/python3'
 
+[terraform]
+mediahub-02 ansible_host='192.168.1.102'
+
 [mediahub]
 mediahub-05 ansible_host='192.168.1.105'
 mediahub-06 ansible_host='192.168.1.106'
