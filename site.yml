@@ -11,3 +11,9 @@
     - mediahub # install mediahub-ws+ mediahub-admin
 #    - shaka-packager
 #    - tsduck
+
+- name: Get VM state from Terraform
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - terraform

@@ -1,0 +1,11 @@
+---
+- name: Apply Terraform configuration (terraform apply)
+  community.general.terraform:
+    project_path: /home/vdpj3398/mediahub-ws-admin/automation/terraform
+    state: present         # <--- equivalent to 'terraform apply'
+    auto_approve: true   # (optional, to avoid interactive confirmation)
+  register: tf_apply
+
+- name: Show apply result
+  debug:
+    var: tf_apply
