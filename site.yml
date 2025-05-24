@@ -7,13 +7,7 @@
   roles:
     - ffmpeg
     - java
-    - mariadb # install mariadb + create database + configure user
+    - mariadb # Mediahub DB + configure user
     - mediahub # install mediahub-ws+ mediahub-admin
 #    - shaka-packager
 #    - tsduck
-
-- name: Get VM state from Terraform
-  hosts: localhost
-  gather_facts: false
-  roles:
-    - terraform
