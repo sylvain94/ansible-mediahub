@@ -15,19 +15,23 @@
       name: mariadb
       state: started
 
-- name: Create Mediahub DB
-  community.mysql.mysql_db:
-      name: media_hub
-      login_user: ansible_user
-      login_password: "{{ ansible_user_password }}"
-      state: present
+- name: Ensure the python library for MySQL is installed
+  apt:
+    name: python3-pymysql
+    state: present
+    update_cache: yes      
+
+- name: Create the media_hub database
+  mysql_db:
+    name: media_hub
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
 
 - name: Create the media_hub_user
   community.mysql.mysql_user:
     name: media_hub_user
+    host: localhost
     password: "{{ db_password }}"
-    login_user: ansible_user
-    login_password: "{{ ansible_user_password }}"
-    login_host: localhost
-    priv: 'media_hub.*:ALL,GRANT'
+    priv: 'media_hub.*:ALL'
     state: present
+    login_unix_socket: /run/mysqld/mysqld.sock    
